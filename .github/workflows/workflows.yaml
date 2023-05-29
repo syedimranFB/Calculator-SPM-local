@@ -32,14 +32,14 @@ jobs:
       - name: Build IOS App
         uses: yukiarrr/ios-build-action@v1.4.0
         with:
-          project-path: Calculator-iOS/Calculator iOS.xcodeproj
+          project-path: Kalculator.xcodeproj
           p12-base64: ${{ secrets.IOS_P12_BASE64 }}
           mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
           code-signing-identity: "iPhone Distribution"
           team-id: ${{ secrets.IOS_TEAM_ID }}
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
-          scheme: Calculator iOS
-          workspace-path: Calculator.xcworkspace
+          scheme: Kalculator
+          workspace-path: Kalculator.xcodeproj/project.xcworkspace
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
@@ -47,8 +47,12 @@ jobs:
           name: Ipa dir
           path: "/Users/runner/work/Calculator-SPM-local/Calculator-SPM-local/*"
       
-      - name: copy past info file
-        run: ls -la && mv ./Calculator-iOS/Calculator iOS/Info.plist ./output.app.dSYM/Calculator\ iOS.app.dSYM/Contents/
+      # - name: copy past info file
+      #   run: |
+      #     ls -la
+      #     unzip output.app.dSYM.zip
+      #     mv ./Calculator-iOS/Calculator iOS/Info.plist ./output.app.dSYM/Calculator\ iOS.app.dSYM/Contents/
+
 
       - name: "Upload app to TestFlight"
         uses: apple-actions/upload-testflight-build@v1
